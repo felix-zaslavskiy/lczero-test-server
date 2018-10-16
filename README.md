@@ -1,0 +1,1 @@
+# lczero-test-server
