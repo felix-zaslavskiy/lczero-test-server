@@ -29,7 +29,7 @@ public class WorkerController {
     }
 
     // Submit Game results
-    @PostMapping("/submmitGame")
+    @PostMapping("/submitGame")
     ResponseEntity submitGame(String user, String password, @RequestBody GameSubmission gameSubmission){
         return null;
     }
