@@ -19,23 +19,37 @@ public class WorkerController {
 
     private static final Logger log = LoggerFactory.getLogger(WorkerController.class);
 
-    // Gets information where to download the correct binary.
+    // Gets information for an active test with some all the necessary info.
     // The workers capabilities are passed as parameters.
-    @GetMapping("getConfig")
-    TestConfig getConfig(String user, String password, String os, String backend) {
-        return null;
+    @GetMapping("getTestConfig")
+    TestConfig getTestConfig(String user, String password, String os, String backend) {
+        TestConfig t = new TestConfig();
+        t.lc0url = "http://localhost:8080/sampleBinary";
+        t.parameters = "";
+        t.testID = 1;
+        t.tcControl = "short";
+        return t;
     }
+
+
 
     // Get information about the game to play next
     @GetMapping("/newGame")
     Game getNewGame(String user, String password, long testID) {
-        return null;
+        Game g = new Game();
+        g.expirationDate = System.currentTimeMillis() + 3600*100;
+        g.openingPGN = "";
+        g.testID = testID;
+        return g;
     }
 
     // Submit Game results
     @PostMapping("/submitGame")
     ResponseEntity submitGame(String user, String password, @RequestBody GameSubmission gameSubmission){
-        return null;
+
+        log.info("Received Game for test {}, PGN: {}", gameSubmission.testID, gameSubmission.PGN);
+        return ResponseEntity.ok().build();
+
     }
 
 
