@@ -1,8 +1,8 @@
-package lczero.worker.rest;
+package lczero.server.rest;
 
 import java.io.Serializable;
 
-// Tells worker how to configure themselves for a test.
+// Tells server how to configure themselves for a test.
 public class TestConfig implements Serializable {
     public long testID;
     public String lc0url; // Where to download binary for test.

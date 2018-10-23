@@ -1,9 +1,7 @@
-package lczero.worker.rest;
-
-import java.io.Serializable;
+package lczero.server.rest;
 
 
-// Defines the game that is issued to worker to play
+// Defines the game that is issued to server to play
 public class Game {
 
     public long testID; // Worker can lookup Configs by the testID

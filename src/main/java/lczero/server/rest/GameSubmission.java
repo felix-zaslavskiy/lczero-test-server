@@ -1,8 +1,6 @@
-package lczero.worker.rest;
+package lczero.server.rest;
 
-import java.io.Serializable;
-
-// Game submitted by worker after it was finished being played.
+// Game submitted by server after it was finished being played.
 public class GameSubmission {
 
     public long testID;

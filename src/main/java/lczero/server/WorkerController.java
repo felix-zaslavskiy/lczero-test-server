@@ -1,8 +1,8 @@
-package lczero.worker;
+package lczero.server;
 
-import lczero.worker.rest.GameSubmission;
-import lczero.worker.rest.TestConfig;
-import lczero.worker.rest.Game;
+import lczero.server.rest.GameSubmission;
+import lczero.server.rest.TestConfig;
+import lczero.server.rest.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
@@ -39,7 +39,8 @@ public class WorkerController {
     }
 
 
-    // Just for testing. TODO:
+    // Just for testing. TODO: disable in prod.
+    // Returns a file so server client can be tested.
     @GetMapping("/sampleBinary")
     ResponseEntity<InputStreamResource> sampleBinary() {
 
