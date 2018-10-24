@@ -1,10 +1,12 @@
 package lczero.server;
 
+import lczero.server.model.Build;
 import lczero.server.rest.GameSubmission;
 import lczero.server.rest.TestConfig;
 import lczero.server.rest.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +26,10 @@ public class WorkerController {
     @GetMapping("getTestConfig")
     TestConfig getTestConfig(String user, String password, String os, String backend) {
         TestConfig t = new TestConfig();
-        t.lc0url = "http://localhost:8080/sampleBinary";
+        t.lc0url = "http://localhost:8080/lc0-v0.18.1-windows-opencl.zip";
         t.parameters = "";
         t.testID = 1;
-        t.tcControl = "short";
+        t.tcControl = "10.0+1";
         return t;
     }
 
@@ -55,10 +57,10 @@ public class WorkerController {
 
     // Just for testing. TODO: disable in prod.
     // Returns a file so server client can be tested.
-    @GetMapping("/sampleBinary")
+    @GetMapping("/lc0-v0.18.1-windows-opencl.zip")
     ResponseEntity<InputStreamResource> sampleBinary() {
 
-        InputStream inputStream = WorkerController.class.getResourceAsStream("/file.bin");
+        InputStream inputStream = WorkerController.class.getResourceAsStream("/lc0-v0.18.1-windows-opencl.zip");
         InputStreamResource resource = new InputStreamResource(inputStream);
 
         return ResponseEntity.ok().body(resource);
