@@ -6,11 +6,11 @@ import lczero.server.rest.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.InputStream;
 
@@ -24,10 +24,11 @@ public class WorkerController {
     @GetMapping("getTestConfig")
     TestConfig getTestConfig(String user, String password, String os, String backend) {
         TestConfig t = new TestConfig();
-        t.lc0url = "http://localhost:8080/sampleBinary";
+        t.lc0url = "http://localhost:8080/getFile/lc0-v0.18.1-windows-opencl.zip";
+        t.baseUrlForTools = "http://localhost:8080/getFile/";
         t.parameters = "";
         t.testID = 1;
-        t.tcControl = "short";
+        t.tcControl = "10.0+1";
         return t;
     }
 
@@ -55,13 +56,19 @@ public class WorkerController {
 
     // Just for testing. TODO: disable in prod.
     // Returns a file so server client can be tested.
-    @GetMapping("/sampleBinary")
-    ResponseEntity<InputStreamResource> sampleBinary() {
+    @GetMapping(
+        value = "/getFile/{filename}"
+        ,  produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    ResponseEntity<Resource> sampleBinary(@PathVariable("filename") String filename) {
 
-        InputStream inputStream = WorkerController.class.getResourceAsStream("/file.bin");
+        // TODO what validation on filename?
+
+        InputStream inputStream = WorkerController.class.getResourceAsStream("/" + filename);
         InputStreamResource resource = new InputStreamResource(inputStream);
 
-        return ResponseEntity.ok().body(resource);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + filename + "\"")
+                .body(resource);
 
     }
 

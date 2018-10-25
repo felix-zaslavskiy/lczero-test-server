@@ -26,10 +26,10 @@ Postgres will be the database backend and communication with workers over REST.
  - getTestConfig returns info how to download correct binary for the test.
 
  - newGame can return games to play to client based on TestConfig
- - DB schema for storing games.
  - submitGame can accept info about played game and store it in DB.
 
 
  - Input screen for entering a Test configuration.
  - Input screen for entering a User
+
  - Build a few html views that show list of Tests and list of all games. View game page for game detail.
