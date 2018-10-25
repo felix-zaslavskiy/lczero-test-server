@@ -18,17 +18,19 @@ Postgres will be the database backend and communication with workers over REST.
 
 
 Dev plans:
+
 - Get to a simplest possible working implementation (MVP)
+
+ - Finish DB schemas
  - DB schema for test.
  - DB schema for user.
  - DB schema for known configurations.
- - getConfig returns info how to download configuration.
 
  - newGame can return games to play to client based on TestConfig
- - DB schema for storing games.
  - submitGame can accept info about played game and store it in DB.
 
  - Build a few html views that show list of Tests and list of all games. View game page for game detail.
 
  - Input screen for entering a Test configuration.
  - Input screen for entering a User
+
