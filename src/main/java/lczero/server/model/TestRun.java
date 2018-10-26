@@ -18,6 +18,12 @@ public class TestRun implements Serializable {
     @ManyToOne
     Build build;
 
+    @ManyToOne
+    Network network1;
+
+    @ManyToOne
+    Network network2;
+
     LocalDateTime createdDate = LocalDateTime.now();
 
     // Time Control for the test

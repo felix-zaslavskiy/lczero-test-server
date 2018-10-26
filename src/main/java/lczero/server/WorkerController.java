@@ -24,11 +24,15 @@ public class WorkerController {
     @GetMapping("getTestConfig")
     TestConfig getTestConfig(String user, String password, String os, String backend) {
         TestConfig t = new TestConfig();
-        t.lc0url = "http://localhost:8080/getFile/lc0-v0.18.1-windows-opencl.zip";
-        t.baseUrlForTools = "http://localhost:8080/getFile/";
+
+        t.lc0filename = "lc0-v0.18.1-windows-opencl.zip";
+        t.baseUrlForLc0 = "http://localhost:8080/";
+        t.baseUrlForTools = "http://localhost:8080/";
+        t.network1 = "6b6e505904aac83d965a35fb2367819d613dc73328d900129f4b43b6d986db60";
+        t.network2 = "6b6e505904aac83d965a35fb2367819d613dc73328d900129f4b43b6d986db60";
         t.parameters = "";
         t.testID = 1;
-        t.tcControl = "10.0+1";
+        t.tcControl = "10.0s+1s";
         return t;
     }
 
@@ -59,7 +63,7 @@ public class WorkerController {
     @GetMapping(
         value = "/getFile/{filename}"
         ,  produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    ResponseEntity<Resource> sampleBinary(@PathVariable("filename") String filename) {
+    ResponseEntity<Resource> getFile(@PathVariable("filename") String filename) {
 
         // TODO what validation on filename?
 
@@ -68,6 +72,22 @@ public class WorkerController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + filename + "\"")
+                .body(resource);
+
+    }
+
+    @GetMapping(
+            value = "/getNetwork/{network}"
+            ,  produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    ResponseEntity<Resource> getNetwork(@PathVariable("network") String network) {
+
+        // TODO Need a store for this
+
+        InputStream inputStream = WorkerController.class.getResourceAsStream("/" + network);
+        InputStreamResource resource = new InputStreamResource(inputStream);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=\"" + network + "\"")
                 .body(resource);
 
     }
