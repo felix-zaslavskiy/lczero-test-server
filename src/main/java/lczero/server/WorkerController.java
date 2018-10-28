@@ -25,14 +25,14 @@ public class WorkerController {
     TestConfig getTestConfig(String user, String password, String os, String backend) {
         TestConfig t = new TestConfig();
 
-        t.lc0filename = "lc0-v0.18.1-windows-opencl.zip";
+        t.lc0filename = "lc0-v0.18.1-windows-blas.zip";
         t.baseUrlForLc0 = "http://localhost:8080/";
         t.baseUrlForTools = "http://localhost:8080/";
-        t.network1 = "6b6e505904aac83d965a35fb2367819d613dc73328d900129f4b43b6d986db60";
-        t.network2 = "6b6e505904aac83d965a35fb2367819d613dc73328d900129f4b43b6d986db60";
+        t.network1 = "snetwork6block";
+        t.network2 = "wnetwork6block";
         t.parameters = "";
         t.testID = 1;
-        t.tcControl = "10.0s+1s";
+        t.tcControl = "30+1";
         return t;
     }
 
