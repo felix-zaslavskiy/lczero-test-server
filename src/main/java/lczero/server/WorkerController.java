@@ -23,9 +23,14 @@ public class WorkerController {
     // The workers capabilities are passed as parameters.
     @GetMapping("getTestConfig")
     TestConfig getTestConfig(String user, String password, String os, String backend) {
+        log.info("Received test config request for backend:" + backend);
         TestConfig t = new TestConfig();
 
-        t.lc0filename = "lc0-v0.18.1-windows-blas.zip";
+        if(backend.equals("blas")) {
+            t.lc0filename = "lc0-v0.18.1-windows-blas.zip";
+        } else if(backend.equals("opencl")){
+            t.lc0filename = "lc0-v0.18.1-windows-opencl.zip";
+        }
         t.baseUrlForLc0 = "http://localhost:8080/";
         t.baseUrlForTools = "http://localhost:8080/";
         t.network1 = "snetwork6block";
@@ -41,6 +46,7 @@ public class WorkerController {
     // Get information about the game to play next
     @GetMapping("/newGame")
     Game getNewGame(String user, String password, long testID) {
+        log.info("Received game request for testId:" + testID);
         Game g = new Game();
         g.expirationDate = System.currentTimeMillis() + 3600*100;
         g.openingPGN = "";

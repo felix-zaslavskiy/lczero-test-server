@@ -19,17 +19,13 @@ Postgres will be the database backend and communication with workers over REST.
 
 ##Dev plans:
 ###Get to a simplest possible working implementation (MVP)
- - DB schema for test.
- - DB schema for user.
- - DB schema for known configurations.
 
- - getTestConfig returns info how to download correct binary for the test.
-
- - newGame can return games to play to client based on TestConfig
+(These three controller methods should read/write to DB)
+ - getTestConfig returns info how to download correct binary for the test (read it from DB)
+ - newGame can return games to play to client based on TestConfig (From DB)
  - submitGame can accept info about played game and store it in DB.
 
-
+(Start on UI using SpringMVC)
  - Input screen for entering a Test configuration.
  - Input screen for entering a User
-
  - Build a few html views that show list of Tests and list of all games. View game page for game detail.
