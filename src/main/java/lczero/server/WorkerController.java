@@ -5,6 +5,7 @@ import lczero.server.rest.TestConfig;
 import lczero.server.rest.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,9 @@ import java.io.InputStream;
 public class WorkerController {
 
     private static final Logger log = LoggerFactory.getLogger(WorkerController.class);
+
+    @Autowired
+    DataManager dm;
 
     // Gets information for an active test with some all the necessary info.
     // The workers capabilities are passed as parameters.
@@ -58,7 +62,9 @@ public class WorkerController {
     @PostMapping("/submitGame")
     ResponseEntity submitGame(String user, String password, @RequestBody GameSubmission gameSubmission){
 
-        log.info("Received Game for test {}, PGN: {}", gameSubmission.testID, gameSubmission.PGN);
+        dm.saveGame(gameSubmission.testID, gameSubmission.PGN);
+        log.info("Received Game for test {}",gameSubmission.testID );
+
         return ResponseEntity.ok().build();
 
     }
